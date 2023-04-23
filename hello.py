@@ -135,7 +135,22 @@ def update_user(id):
             flash("User updated successfully", "success")
         except:
             flash("Looks like there was a problem...try again!", "error")
-    return render_template("update_user.html", form = form, name_to_update = name_to_update)
+    return render_template("update_user.html", form = form, name_to_update = name_to_update, id = id)
+
+
+@app.route('/user/delete/<int:id>')
+def delete_user(id):
+    user_to_delete = Users.query.get_or_404(id)
+    name = None
+    form = UserForm()
+    try:
+        db.session.delete(user_to_delete)
+        db.session.commit()
+        flash("User deleted successfully!", "success")
+    except:
+        flash("Ошибка при удалении пользователя...", "error")
+    our_users = Users.query.order_by(Users.date_added)
+    return render_template('add_user.html', name = name, form = form, our_users=our_users)
 
 
 # Create Custom Error Pages

@@ -1,30 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    {% for category, message in get_flashed_messages(with_categories=true) %}
-        
-        {% if category == 'success' %}
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ name }} - {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {% endif %}
-        {% if category == 'warning' %}
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {{ name }} - {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {% endif %}
-        {% if category == 'error' %}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ name }} - {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {% endif %}
-
-    {% endfor %}
-
     <!-- <h1>Whats's Your Name!</h1> -->
     {% if name %}
         <h1>User: {{ name }}</h1>
@@ -32,7 +8,7 @@
         <table class="table table-hover table-bordered table-striped">
             {% for our_user in our_users %}
                 <tr>
-                    <td>{{ our_user.id }}. <a href="{{ url_for('update_user', id = our_user.id) }}">{{ our_user.name }}</a> - {{ our_user.email }} - {{ our_user.favorite_color }}</td>
+                    <td>{{ our_user.id }}. <a href="{{ url_for('update_user', id = our_user.id) }}">{{ our_user.name }}</a> - {{ our_user.email }} - {{ our_user.favorite_color }} - <a href="{{ url_for('delete_user', id = our_user.id) }}">Delete</a></td>
                 </tr>
             {% endfor %}
         </table>
@@ -64,7 +40,7 @@
         <table class="table table-hover table-bordered table-striped">
             {% for our_user in our_users %}
                 <tr>
-                    <td>{{ our_user.id }}.</td> <td><a href="{{ url_for('update_user', id = our_user.id) }}">{{ our_user.name }}</a></td> <td>{{ our_user.email }}</td> <td>{{ our_user.favorite_color }}</td>
+                    <td>{{ our_user.id }}.</td> <td><a href="{{ url_for('update_user', id = our_user.id) }}">{{ our_user.name }}</a></td> <td>{{ our_user.email }}</td> <td>{{ our_user.favorite_color }}</td>  <td><a href="{{ url_for('delete_user', id = our_user.id) }}">Delete</a></td>
                 </tr>
             {% endfor %}
         </table>
